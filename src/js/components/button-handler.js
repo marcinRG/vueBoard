@@ -7,7 +7,7 @@ export const buttonHandler = new Vue({
         isUpperCase: false
     },
     methods: {
-        changeTextCase: function () {
+        changeTextCase() {
             if (!this.isUpperCase) {
                 this.textDisplay = this.textDisplay.toUpperCase();
                 this.isUpperCase = true;
