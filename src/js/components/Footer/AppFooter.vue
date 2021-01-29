@@ -1,12 +1,16 @@
 <template>
   <footer>
-     <p>&copy; 2021</p>
+    <p>&copy; 2021</p>
   </footer>
 </template>
 
 <script>
+import {linksMixin} from "../../mixins/linksMixin";
+
 export default {
-name: "Footer"
+  name: "Footer",
+  mixins: [linksMixin]
+
 }
 </script>
 

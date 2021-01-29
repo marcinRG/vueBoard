@@ -17,7 +17,7 @@ export default {
   components: {EnemyBoard},
   data() {
     return {
-      enemies: [
+      enemyTypes: [
         {
           name: 'Baba',
           hp: 100,
@@ -33,7 +33,12 @@ export default {
           hp: 55,
           enemyClass: 'berserk'
         }
-      ]
+      ],
+      state: {
+        state: 'start',
+        score: 0,
+        level: 0
+      }
     }
   },
 }
