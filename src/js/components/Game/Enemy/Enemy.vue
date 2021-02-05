@@ -1,10 +1,21 @@
 <template>
-  <div class="enemy">
+  <div v-bind:class="setClassName" v-on:click="handleClickEvent">
     <div class="enemy-image-container"></div>
     <div class="enemy-properties-container">
-      <p>Name</p>
-      <p>enemy class</p>
-      <span>hp</span>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td> {{ this.name }}</td>
+        </tr>
+        <tr>
+          <td>Enemy class</td>
+          <td> {{ this.enemyClass }}</td>
+        </tr>
+        <tr>
+          <td>HP</td>
+          <td> {{ this.hp }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -13,6 +24,10 @@
 export default {
   name: "Enemy",
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -26,16 +41,37 @@ export default {
       required: false
     },
     selected: {
-      type: Boolean,
-      required: false
+      type: Number,
+      required: true
     }
   },
+  methods: {
+    handleClickEvent() {
+      this.$emit('changeSelectedElement', {
+        selected: this.id
+      });
+    }
+  },
+  computed: {
+    setClassName() {
+      let className = 'enemy';
+      if (this.id === this.selected) {
+        className = className + ' ' + 'selected';
+      }
+      return className;
+    }
+  }
 }
 </script>
 
 <style scoped>
 .enemy {
   border: 3px solid black;
+  background-color: aquamarine;
+}
+
+.enemy.selected {
+  background-color: indianred;
 }
 
 .enemy:first-of-type {
@@ -48,7 +84,7 @@ export default {
 
 .enemy-image-container {
   height: 300px;
-  background-color: red;
+  background-color: white;
 }
 
 .enemy-properties-container {

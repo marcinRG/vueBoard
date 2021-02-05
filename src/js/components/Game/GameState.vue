@@ -1,20 +1,13 @@
 <template>
-  <div>
-    <h2>Game on!</h2>
-    <div>
-      <p>To jest jakiś tekst</p>
-      <enemy-board></enemy-board>
-    </div>
-
-  </div>
+  <div></div>
 </template>
 
 <script>
 
-import EnemyBoard from "./EnemyBoard/EnemyBoard";
+import {gameStates} from "../../utils/gameStates";
+
 export default {
   name: "Game",
-  components: {EnemyBoard},
   data() {
     return {
       enemyTypes: [
@@ -35,7 +28,7 @@ export default {
         }
       ],
       state: {
-        state: 'start',
+        state: gameStates.START,
         score: 0,
         level: 0
       }
@@ -45,5 +38,7 @@ export default {
 </script>
 
 <style scoped>
-
+.game-panel {
+  width: 100%;
+}
 </style>

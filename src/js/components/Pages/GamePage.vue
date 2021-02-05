@@ -1,16 +1,14 @@
 <template>
    <div>
-     <h2>Game</h2>
-     <p>Game page</p>
-     <enemy-board></enemy-board>
+      <game-panel></game-panel>
    </div>
 </template>
 
 <script>
-import EnemyBoard from "../Game/EnemyBoard/EnemyBoard";
+import Game from "../Game/GameScreen/Game";
 export default {
 name: "GamePage",
-  components: {EnemyBoard}
+  components: {'game-panel': Game}
 }
 </script>
 
