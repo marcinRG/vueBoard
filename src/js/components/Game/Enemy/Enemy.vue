@@ -22,7 +22,7 @@ export default {
       required: true
     },
     hp: {
-      type: Number,
+      type: String,
       required: false
     },
     selected: {
