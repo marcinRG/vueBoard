@@ -1,9 +1,30 @@
 *,
 html,
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Press Start 2P', cursive;
   border: 0;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: magenta;
+}
+
+.page-section {
+  padding: 50px 20px;
+  background-color: #a40202;
+
+  .text {
+    color: white;
+    text-shadow: black 2px 1px 0px;
+  }
+
+  .subtitle {
+    color: white;
+    text-shadow: black 4px 2px 0px;
+    margin-bottom: 20px;
+  }
+
 }

@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="footer">
     <p>&copy; 2021</p>
   </footer>
 </template>
@@ -15,5 +15,11 @@ export default {
 </script>
 
 <style scoped>
-
+.footer {
+  text-align: center;
+  background-color: magenta;
+  color: white;
+  text-shadow: black 2px 1px 0px;
+  padding: 20px;
+}
 </style>

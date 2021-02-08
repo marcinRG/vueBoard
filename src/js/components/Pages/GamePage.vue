@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Game from "../Game/GameScreen/Game";
+import Game from "../GameStates/Game";
 export default {
 name: "GamePage",
   components: {'game-panel': Game}

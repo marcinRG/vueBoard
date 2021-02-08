@@ -4,7 +4,7 @@
 
 <script>
 
-import {gameStates} from "../../utils/gameStates";
+import {gameStates} from "../js/game/gameStates";
 
 export default {
   name: "Game",
