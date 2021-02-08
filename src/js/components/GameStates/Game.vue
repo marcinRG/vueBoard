@@ -1,14 +1,15 @@
 <template>
-  <div class="game-panels">
-    <component v-bind:is="getComponentName"></component>
+  <div class='game-panels'>
+    <component v-bind:is='getComponentName'></component>
   </div>
 </template>
 
 <script>
 
-import {gameStates} from "../../game/gameStates";
-import Loading from "./loading/Loading";
-import Start from "./start/Start";
+import {gameStates} from '../../game/gameStates';
+import Loading from './loading/Loading';
+import Start from './start/Start';
+import ChooseEnemies from './choose-enemies/ChooseEnemies';
 
 function getComponent(gameState) {
   switch (gameState) {
@@ -34,9 +35,11 @@ function getComponent(gameState) {
 }
 
 export default {
-  name: "Game",
-  components: {'game-loading': Loading, 'game-start': Start},
-  mounted() {
+  name: 'Game',
+  components: {
+    'game-loading': Loading,
+    'game-start': Start,
+    'choose-enemies': ChooseEnemies
   },
   computed: {
     gameState() {
@@ -46,11 +49,7 @@ export default {
       return getComponent(this.$store.state.GameState)
     }
   },
-  methods: {
-    checkState() {
-      this.$store.commit('initGame');
-    }
-  }
+  methods: {}
 }
 </script>
 
@@ -58,6 +57,6 @@ export default {
 .game-panels {
   background-color: green;
   width: 100%;
-  height: 750px;
+  height: 700px;
 }
 </style>

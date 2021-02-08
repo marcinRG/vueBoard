@@ -35,7 +35,7 @@ export default {
   font-size: 40px;
   text-align: center;
   color: white;
-  text-shadow: black 4px 2px 0px;
+  text-shadow: black 4px 2px 0;
 
 }
 

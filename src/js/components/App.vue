@@ -12,6 +12,9 @@ import AppFooter from './Footer/AppFooter';
 
 export default {
   name: "App",
+  mounted() {
+    this.$store.commit('initGame');
+  },
   components: {
     'app-header': AppHeader,
     'app-footer': AppFooter,
