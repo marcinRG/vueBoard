@@ -9,13 +9,20 @@ export const store = new Vuex.Store({
     state: {
         GameState: gameStates.LOADING,
         enemies: [],
-        enemy: {},
         player: {},
         selectedEnemy: 0,
         level: 0,
         score: 0
     },
-    getters: {},
+    getters: {
+        getEnemies(state) {
+            return {
+                enemy: state.enemy,
+                selectedEnemy: state.selectedEnemy,
+                enemies: state.enemies
+            };
+        }
+    },
     mutations: {
         test(state) {
             console.log('mutation test fired');
@@ -29,9 +36,9 @@ export const store = new Vuex.Store({
         startGame(state) {
             const enemies = getEnemies(1);
             state.GameState = gameStates.CHOOSE_ENEMIES;
-            state.level= 1;
+            state.selectedEnemy = 0;
+            state.level = 1;
             state.enemies = enemies;
-            state.enemy = enemies[0];
         }
     }
 
