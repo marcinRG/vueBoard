@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     state: {
         GameState: gameStates.LOADING,
         enemies: [],
+        enemy: {},
         player: {},
         selectedEnemy: 0,
         level: 0,
@@ -27,19 +28,43 @@ export const store = new Vuex.Store({
         test(state) {
             console.log('mutation test fired');
         },
+
         initGame(state) {
             state.level = 0;
             state.selectedEnemy = 0;
             state.score = 0;
             state.GameState = gameStates.START;
         },
+
         startGame(state) {
             const enemies = getEnemies(1);
             state.GameState = gameStates.CHOOSE_ENEMIES;
             state.selectedEnemy = 0;
             state.level = 1;
             state.enemies = enemies;
+        },
+
+        attackEnemy(state) {
+            state.GameState = gameStates.ATTACK_ENEMY;
+            state.enemy = state.enemies[state.selectedEnemy];
+        },
+
+        selectEnemy(state, data) {
+            state.selectedEnemy = data.id;
+        },
+
+        selectEnemyUp(state) {
+            if (state.selectedEnemy < state.enemies.length - 1) {
+                state.selectedEnemy = state.selectedEnemy + 1;
+            }
+        },
+
+        selectEnemyDown(state) {
+            if (state.selectedEnemy > 0) {
+                state.selectedEnemy = state.selectedEnemy - 1;
+            }
         }
+
     }
 
 });

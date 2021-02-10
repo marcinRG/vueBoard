@@ -10,6 +10,7 @@ import {gameStates} from '../../game/gameStates';
 import Loading from './loading/Loading';
 import Start from './start/Start';
 import ChooseEnemies from './choose-enemies/ChooseEnemies';
+import AttackEnemy from "./attatck-enemy/AttackEnemy";
 
 function getComponent(gameState) {
   switch (gameState) {
@@ -39,7 +40,8 @@ export default {
   components: {
     'game-loading': Loading,
     'game-start': Start,
-    'choose-enemies': ChooseEnemies
+    'choose-enemies': ChooseEnemies,
+    'attack-enemy': AttackEnemy
   },
   computed: {
     gameState() {

@@ -1,14 +1,21 @@
 <template>
   <div class="enemy-board">
-    <p>Choose enemies</p>
-    <div class="enemy-container" v-on:keyup="keyEventHandler" tabindex="0"
-         ref="enemyBoardRef" v-on:click="clickEventHandler">
-      <div v-for="(enemy,index) in getEnemies.enemies">
-        <enemy v-bind:id="index" v-bind:enemy-class="enemy.enemyClass" v-bind:hp="enemy.hp"
+    <div class="enemy-container" v-on:keyup="keyEventHandler">
+      <div class="enemies-list" tabindex="0"
+           ref="enemyBoardRef" v-on:click="clickEventHandler">
+        <enemy v-for="(enemy,index) in getEnemies.enemies" v-bind:id="index" v-bind:enemy-class="enemy.enemyClass"
+               v-bind:hp="enemy.hp"
                v-bind:selected="getEnemies.selectedEnemy"></enemy>
       </div>
     </div>
-    <button v-on:click="checkState">Check state</button>
+    <div class="enemy-controls">
+      <div>
+        <button v-on:click="buttonDownHandler">&#9668;</button>
+        <button v-on:click="buttonUpHandler">&#9654;</button>
+      </div>
+      <button v-on:click="attackButtonHandler">Atakuj !!!</button>
+    </div>
+    <button v-on:click="checkState">re-roll</button>
   </div>
 </template>
 
@@ -23,23 +30,37 @@ export default {
   components: {'enemy': EnemyListComponent},
   methods: {
     checkState() {
-      console.log(this.getEnemies);
+      this.$store.commit('startGame');
     },
     setFocus() {
       this.$refs.enemyBoardRef.focus();
     },
+
     keyEventHandler(event) {
       switch (event.code) {
         case 'ArrowLeft': {
-          console.log('left');
+          this.$store.commit('selectEnemyDown');
           break;
         }
         case 'ArrowRight': {
-          console.log('right');
+          this.$store.commit('selectEnemyUp');
           break;
         }
       }
     },
+
+    buttonUpHandler() {
+      this.$store.commit('selectEnemyUp');
+    },
+
+    buttonDownHandler() {
+      this.$store.commit('selectEnemyDown');
+    },
+
+    attackButtonHandler() {
+      this.$store.commit('attackEnemy');
+    },
+
     clickEventHandler() {
       this.setFocus();
     }
@@ -54,7 +75,27 @@ export default {
 
 <style scoped>
 .enemy-board {
-  border: 1px dotted black;
+  margin: 0 auto;
+}
+
+.enemy-board button {
+  padding: 15px 30px;
+  background-color: white;
+  box-shadow: 7px 7px 0 0 black;
+  cursor: pointer;
+}
+
+.enemy-controls {
+  display: grid;
+  justify-items: center;
+  grid-row-gap: 20px;
+}
+
+.enemies-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  outline: 0;
 }
 
 </style>
