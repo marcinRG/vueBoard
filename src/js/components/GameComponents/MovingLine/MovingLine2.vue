@@ -4,9 +4,13 @@
 
 <script>
 export default {
-  name: "Moving-Line",
+  name: "MovingLine2",
   props: {
     position: {
+      type: Number,
+      required: true
+    },
+    max: {
       type: Number,
       required: true
     },
@@ -34,7 +38,12 @@ export default {
 </script>
 
 <style scoped>
+
 .line {
+  position: absolute;
+}
+
+.text {
   position: absolute;
 }
 
@@ -49,5 +58,6 @@ export default {
   width: 2px;
   background-color: indianred;
 }
+
 
 </style>
