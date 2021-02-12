@@ -6,7 +6,6 @@
     </div>
     <div class="hit-box-controls">
       <button v-on:click="buttonClickHandler"> {{ this.getButtonText }}</button>
-      <button v-on:click="move">Check state</button>
     </div>
   </div>
 </template>
@@ -17,8 +16,9 @@ import MovingLine from "../MovingLine/MovingLine";
 const hitBoxStates = {
   BEGIN: 'begin',
   POS_X: 'position x',
-  POS_Y: 'postion y',
-  END: 'end'
+  POS_Y: 'position y',
+  END: 'calculated',
+  FINISHED: 'finish'
 };
 
 function move(obj) {
@@ -59,12 +59,11 @@ export default {
           break;
         }
         case hitBoxStates.END: {
-          console.log(this.x.position);
-          console.log(this.y.position);
+          this.$store.commit('inflictDamageToEnemy', {x: this.x.position, y: this.y.position});
+          this.componentState = hitBoxStates.FINISHED;
         }
       }
 
-      console.log(this.componentState)
     },
     move() {
       if (this.componentState === hitBoxStates.POS_X) {
@@ -98,7 +97,16 @@ export default {
         case hitBoxStates.END: {
           return 'Koniec rundy';
         }
+        default: {
+          return 'Nieakt.'
+        }
       }
+    },
+    getBackButtonDiableState() {
+      if (this.componentState === hitBoxStates.BEGIN || this.componentState === hitBoxStates.FINISHED) {
+        return false;
+      }
+      return true;
     }
   },
   data() {
@@ -107,13 +115,13 @@ export default {
       x: {
         max: 0,
         position: -3,
-        step: 5,
+        step: 12,
         direction: 1,
       },
       y: {
         max: 0,
         position: -3,
-        step: 5,
+        step: 20,
         direction: 1,
       }
     }

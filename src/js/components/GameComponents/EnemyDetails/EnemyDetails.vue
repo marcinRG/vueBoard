@@ -3,12 +3,17 @@
     <p>
       Enemy details
     </p>
+    <div class="enemy-wrapper"></div>
+    <div class="damage-wrapper"></div>
+    <move-display></move-display>
   </div>
 </template>
 
 <script>
+import MoveDisplay from "../MoveDisplay/MoveDisplay";
 export default {
-name: "EnemyDetails"
+name: "EnemyDetails",
+  components: {MoveDisplay}
 }
 </script>
 

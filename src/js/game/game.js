@@ -21,4 +21,6 @@ export function getEnemies(level) {
     return enemies;
 }
 
-
+export function calculateDamage(x,y) {
+    return 25;
+}

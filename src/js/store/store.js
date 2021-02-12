@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {gameStates} from "../game/gameStates";
-import {getEnemies} from "../game/game";
+import {calculateDamage, getEnemies} from "../game/game";
 
 Vue.use(Vuex);
 
@@ -10,7 +10,10 @@ export const store = new Vuex.Store({
         GameState: gameStates.LOADING,
         enemies: [],
         enemy: {},
-        player: {},
+        player: {
+            moves: 5,
+            debuffs: [],
+        },
         selectedEnemy: 0,
         level: 0,
         score: 0
@@ -63,7 +66,13 @@ export const store = new Vuex.Store({
             if (state.selectedEnemy > 0) {
                 state.selectedEnemy = state.selectedEnemy - 1;
             }
+        },
+
+        inflictDamageToEnemy(state,obj) {
+            console.log('inflict damage to enemy');
+            const dmg = calculateDamage(obj.x,obj.y);
         }
+
 
     }
 

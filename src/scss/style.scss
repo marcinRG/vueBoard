@@ -12,6 +12,16 @@ body {
   background-color: deeppink;
 }
 
+.block-with-shadow {
+  padding: 7px;
+  border: 4px solid white;
+  box-shadow: 7px 7px 0 0 black;
+  width: 280px;
+  height: 420px;
+  font-size: 14px;
+}
+
+
 .page-section {
   padding: 50px 20px;
   background-color: #ec72fc;
