@@ -1,10 +1,11 @@
 <template>
   <div class="hit-box">
     <div class="hit-panel" ref="box">
-      <moving-line2 v-bind:position="x.position" v-bind:max="x.max" line-type="vertical"></moving-line2>
-      <moving-line2 v-bind:position="y.position" v-bind:max="y.max" line-type="horizontal"></moving-line2>
+      <moving-line v-bind:position="x.position" v-bind:max="x.max" line-type="vertical"></moving-line>
+      <moving-line v-bind:position="y.position" v-bind:max="y.max" line-type="horizontal"></moving-line>
     </div>
     <div class="hit-box-controls">
+      <button v-on:click="buttonClickHandler"> {{ this.getButtonText }}</button>
       <button v-on:click="move">Check state</button>
     </div>
   </div>
@@ -12,7 +13,13 @@
 
 <script>
 import MovingLine from "../MovingLine/MovingLine";
-import MovingLine2 from "../MovingLine/MovingLine2";
+
+const hitBoxStates = {
+  BEGIN: 'begin',
+  POS_X: 'position x',
+  POS_Y: 'postion y',
+  END: 'end'
+};
 
 function move(obj) {
   if (obj.direction === 1 && obj.position >= obj.max) {
@@ -32,27 +39,80 @@ export default {
     this.y.max = this.$refs.box.getBoundingClientRect().height;
   },
   components: {
-    MovingLine2,
     'moving-line': MovingLine
   },
   methods: {
+    buttonClickHandler() {
+      switch (this.componentState) {
+        case hitBoxStates.BEGIN: {
+          this.runAnimation();
+          this.componentState = hitBoxStates.POS_X;
+          break;
+        }
+        case hitBoxStates.POS_X: {
+          this.componentState = hitBoxStates.POS_Y;
+          this.runAnimation();
+          break;
+        }
+        case hitBoxStates.POS_Y: {
+          this.componentState = hitBoxStates.END;
+          break;
+        }
+        case hitBoxStates.END: {
+          console.log(this.x.position);
+          console.log(this.y.position);
+        }
+      }
+
+      console.log(this.componentState)
+    },
     move() {
-      move(this.x);
-      move(this.y);
+      if (this.componentState === hitBoxStates.POS_X) {
+        move(this.x);
+      }
+      if (this.componentState === hitBoxStates.POS_Y) {
+        move(this.y);
+      }
+      if (this.componentState !== hitBoxStates.POS_X && this.componentState !== hitBoxStates.POS_X) {
+        cancelAnimationFrame(this.intervalHandler);
+      }
+    },
+    runAnimation() {
+      this.move();
+      this.intervalHandler = requestAnimationFrame(this.runAnimation);
+    }
+
+  },
+  computed: {
+    getButtonText() {
+      switch (this.componentState) {
+        case hitBoxStates.BEGIN: {
+          return 'Zacznij';
+        }
+        case hitBoxStates.POS_X: {
+          return 'Wyznacz X'
+        }
+        case hitBoxStates.POS_Y: {
+          return 'Wyznacz Y';
+        }
+        case hitBoxStates.END: {
+          return 'Koniec rundy';
+        }
+      }
     }
   },
   data() {
     return {
-      runState: 'run',
+      componentState: hitBoxStates.BEGIN,
       x: {
         max: 0,
-        position: 0,
+        position: -3,
         step: 5,
         direction: 1,
       },
       y: {
         max: 0,
-        position: 0,
+        position: -3,
         step: 5,
         direction: 1,
       }
@@ -68,8 +128,15 @@ export default {
   border: 4px solid white;
   box-shadow: 7px 7px 0 0 black;
   width: 280px;
-  height: 420px;
+  height: 500px;
   font-size: 14px;
+}
+
+.hit-box button {
+  padding: 15px 30px;
+  background-color: white;
+  box-shadow: 7px 7px 0 0 black;
+  cursor: pointer;
 }
 
 .hit-panel {

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import MovingLine from "../../js/components/GameComponents/MovingLine/MovingLine";
+import MovingLine from "./MovingLine";
 
 export default {
   name: "HitBox",

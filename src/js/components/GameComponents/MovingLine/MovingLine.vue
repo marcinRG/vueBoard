@@ -1,33 +1,23 @@
 <template>
-  <div>
-    <div class="line" v-bind:class="lineType" v-bind:style="setStyle"></div>
-  </div>
+  <div class="line" v-bind:class="lineType" v-bind:style="setStyle"></div>
 </template>
 
 <script>
-
-import {movableObjectMixin} from '../../../mixins/movableObjectMixin'
-
 export default {
-  name: "Moving-Line",
+  name: "MovingLine",
   props: {
     position: {
       type: Number,
-      required: true
-    },
-    lineType: {
-      type: String,
       required: true
     },
     max: {
       type: Number,
       required: true
     },
-    run: {
+    lineType: {
       type: String,
-      required: false
+      required: true
     }
-
   },
   computed: {
     setStyle() {
@@ -43,30 +33,27 @@ export default {
       }
       return objStyle;
     }
-  },
-  mixins: [movableObjectMixin]
+  }
 }
 </script>
 
 <style scoped>
-.line {
-  position: absolute;
-}
 
-.text {
+.line {
   position: absolute;
 }
 
 .line.horizontal {
   width: 100%;
-  height: 2px;
-  background-color: darkorange;
+  height: 3px;
+  background-color: deeppink;
 }
 
 .line.vertical {
   height: 100%;
-  width: 2px;
-  background-color: indianred;
+  width: 3px;
+  background-color: magenta;
 }
+
 
 </style>
