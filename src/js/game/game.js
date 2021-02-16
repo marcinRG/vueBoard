@@ -16,11 +16,17 @@ export function getEnemies(level) {
     const enemiesTable = Object.values(enemyTypes);
     let enemies = [];
     for (let i = 1; i <= enemiesCount; i++) {
-        enemies.push(enemiesTable[getRandomIntInclusive(0, enemiesTable.length - 1)]);
+        const enemy = createEnemy(enemiesTable[getRandomIntInclusive(0, enemiesTable.length - 1)]);
+        enemies.push(enemy);
     }
     return enemies;
 }
 
-export function calculateDamage(x,y) {
+export function calculateDamage(x, y) {
     return 25;
+}
+
+export function createEnemy(enemyType) {
+    const newEnemy = {...enemyType, Hp: enemyType.maxHp};
+    return newEnemy;
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="move-display">
-    <move></move>
-    <move></move>
+    <move v-for="move in moves" v-bind:id="move"></move>
   </div>
 </template>
 
@@ -12,12 +11,18 @@ export default {
   components: {
     move: Move
   },
+  props: {
+    moves: {
+      type: Number,
+      required: false
+    }
+  },
   name: "MoveDisplay"
 }
 </script>
 
 <style scoped>
-  .move-display {
-     display: flex;
-  }
+.move-display {
+  display: flex;
+}
 </style>

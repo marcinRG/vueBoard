@@ -11,8 +11,15 @@ export const store = new Vuex.Store({
         enemies: [],
         enemy: {},
         player: {
+            Hp: 80,
+            maxHp: 100,
             moves: 5,
-            debuffs: [],
+            debuffs: [{
+                name: 'custom debuff',
+                rounds: 5,
+                description: 'debuff description',
+                img: ''
+            }],
         },
         selectedEnemy: 0,
         level: 0,
@@ -25,7 +32,11 @@ export const store = new Vuex.Store({
                 selectedEnemy: state.selectedEnemy,
                 enemies: state.enemies
             };
+        },
+        getPlayer(state) {
+            return state.player;
         }
+
     },
     mutations: {
         test(state) {
@@ -68,11 +79,10 @@ export const store = new Vuex.Store({
             }
         },
 
-        inflictDamageToEnemy(state,obj) {
+        inflictDamageToEnemy(state, obj) {
             console.log('inflict damage to enemy');
-            const dmg = calculateDamage(obj.x,obj.y);
+            const dmg = calculateDamage(obj.x, obj.y);
         }
-
 
     }
 

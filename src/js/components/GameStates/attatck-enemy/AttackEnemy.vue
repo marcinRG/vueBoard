@@ -1,8 +1,15 @@
 <template>
   <div class="attack-enemy">
-    <p>Attack enenmy</p>
     <div class="enemy-wrapper">
-      <enemy-details></enemy-details>
+      <div>
+        <frame-with-name frame-name="Enemy">
+          <enemy-details></enemy-details>
+        </frame-with-name>
+        <frame-with-name frame-name="Player">
+          <player-details></player-details>
+        </frame-with-name>
+      </div>
+
       <hit-box></hit-box>
     </div>
     <div class="enemy-controls">
@@ -14,11 +21,15 @@
 <script>
 import HitBox from "../../GameComponents/HitBox/HitBox";
 import EnemyDetails from "../../GameComponents/EnemyDetails/EnemyDetails";
+import PlayerDetails from "../../GameComponents/PlayerDetails/PlayerDetails";
+import FrameWithName from "../../GameComponents/FrameWithName/FrameWithName";
 
 export default {
   components: {
+    'player-details': PlayerDetails,
     'hit-box': HitBox,
-    'enemy-details': EnemyDetails
+    'enemy-details': EnemyDetails,
+    'frame-with-name': FrameWithName
   },
   name: "AttackEnemy"
 }
@@ -42,8 +53,9 @@ export default {
 }
 
 .enemy-wrapper {
-  margin: 30px auto;
+  margin: 0 auto;
   display: flex;
+  padding: 30px 0;
   justify-content: center;
 }
 

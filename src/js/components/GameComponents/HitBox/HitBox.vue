@@ -115,13 +115,13 @@ export default {
       x: {
         max: 0,
         position: -3,
-        step: 12,
+        step: 2,
         direction: 1,
       },
       y: {
         max: 0,
         position: -3,
-        step: 20,
+        step: 4,
         direction: 1,
       }
     }
