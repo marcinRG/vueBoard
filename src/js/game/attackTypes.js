@@ -1,3 +1,7 @@
+import imgSlash from '../../../src/images/paw.png';
+import imgStun from '../../../src/images/superpower.png';
+import imgBlind from '../../../src/images/fire-round-button.png';
+
 export const attackNames = {
     stun: 'stun',
     slash: 'slash',
@@ -6,15 +10,21 @@ export const attackNames = {
 
 export const attackTypes = {
     stun: {
-        attackDescription: '',
+        title: 'stun',
+        description: 'stun attack',
         dot: false,
+        img: imgStun,
     },
     slash: {
-        attackDescription: '',
+        title: 'slash',
+        description: 'slash attack',
         dot: true,
+        img: imgSlash
     },
     blind: {
-        attackDescription: '',
+        title: 'blind',
+        description: 'blind attack',
         dot: false,
+        img: imgBlind
     }
 };

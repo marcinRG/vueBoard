@@ -52,6 +52,7 @@ export const store = new Vuex.Store({
 
         startGame(state) {
             const enemies = getEnemies(1);
+            console.log(enemies);
             state.GameState = gameStates.CHOOSE_ENEMIES;
             state.selectedEnemy = 0;
             state.level = 1;

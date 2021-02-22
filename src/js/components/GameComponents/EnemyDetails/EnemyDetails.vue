@@ -12,9 +12,16 @@
 <script>
 
 import StatBar from "../StatBar/StatBar";
+
 export default {
   name: "EnemyDetails",
-  components: {StatBar}
+  components: {StatBar},
+  props: {
+    enemy: {
+      type: Object,
+      required: false
+    }
+  }
 }
 </script>
 
@@ -38,6 +45,7 @@ export default {
 
 .enemy-image {
   height: 140px;
+  width: auto;
   background-color: white;
 }
 

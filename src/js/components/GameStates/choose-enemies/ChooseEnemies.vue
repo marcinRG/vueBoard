@@ -5,7 +5,9 @@
            ref="enemyBoardRef" v-on:click="clickEventHandler">
         <enemy v-for="(enemy,index) in getEnemies.enemies" v-bind:id="index" v-bind:enemy-class="enemy.enemyClass"
                v-bind:hp="enemy.hp"
-               v-bind:selected="getEnemies.selectedEnemy"></enemy>
+               v-bind:selected="getEnemies.selectedEnemy"
+               v-bind:enemy="enemy">
+        </enemy>
       </div>
     </div>
     <div class="enemy-controls">
