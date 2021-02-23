@@ -3,10 +3,11 @@
     <div class="enemy-wrapper">
       <div>
         <frame-with-name frame-name="Enemy">
-          <enemy-details></enemy-details>
+          <enemy-details v-bind:enemy="this.getSelectedEnemy"></enemy-details>
         </frame-with-name>
         <frame-with-name frame-name="Player">
           <player-details></player-details>
+
         </frame-with-name>
       </div>
 
@@ -24,12 +25,18 @@ import EnemyDetails from "../../GameComponents/EnemyDetails/EnemyDetails";
 import PlayerDetails from "../../GameComponents/PlayerDetails/PlayerDetails";
 import FrameWithName from "../../GameComponents/FrameWithName/FrameWithName";
 
+
 export default {
   components: {
     'player-details': PlayerDetails,
     'hit-box': HitBox,
     'enemy-details': EnemyDetails,
-    'frame-with-name': FrameWithName
+    'frame-with-name': FrameWithName,
+  },
+  computed: {
+    getSelectedEnemy() {
+      return this.$store.getters.getSelectedEnemy;
+    }
   },
   name: "AttackEnemy"
 }

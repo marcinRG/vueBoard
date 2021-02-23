@@ -5,10 +5,7 @@
       <stat-bar stat-name="HP" v-bind:value="this.enemy.Hp" v-bind:max="this.enemy.maxHp"></stat-bar>
       <span class="stats-details">class: {{ this.enemy.enemyClass }}</span>
       <span class="stats-details">atk: {{ this.enemy.attackStrength }}</span>
-      <div class="attacks-debuffs-wrapper">
-        <span class="stats-details">attacks:</span>
-        <debuff v-for="debuff in this.enemy.specialAttacks" v-bind:name="debuff"></debuff>
-      </div>
+      <attacks-debuffs-wrapper list-name="attacks:" v-bind:elements="this.enemy.specialAttacks"></attacks-debuffs-wrapper>
     </div>
   </div>
 </template>
@@ -16,10 +13,11 @@
 <script>
 import StatBar from "../StatBar/StatBar";
 import Debuff from "../Debuff/Debuff";
+import DebuffsAttacksList from "../Debuffs-Attacks-List/DebuffsAttacksList";
 
 export default {
   name: "EnemyListComponent",
-  components: {'debuff': Debuff, 'stat-bar': StatBar},
+  components: {'debuff': Debuff, 'stat-bar': StatBar, 'attacks-debuffs-wrapper': DebuffsAttacksList},
   props: {
     enemy: {
       type: Object,
@@ -60,13 +58,6 @@ export default {
 </script>
 
 <style scoped>
-
-.attacks-debuffs-wrapper {
-  display: grid;
-  grid-template-columns: auto repeat(5, 30px);
-  grid-column-gap: 5px;
-  padding: 10px 0;
-}
 
 .stats-details {
   width: 100%;
