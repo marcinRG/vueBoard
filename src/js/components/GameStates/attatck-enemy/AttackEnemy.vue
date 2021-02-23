@@ -3,7 +3,7 @@
     <div class="enemy-wrapper">
       <div>
         <frame-with-name frame-name="Enemy">
-          <enemy-details v-bind:enemy="this.getSelectedEnemy"></enemy-details>
+          <enemy-details></enemy-details>
         </frame-with-name>
         <frame-with-name frame-name="Player">
           <player-details></player-details>

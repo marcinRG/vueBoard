@@ -1,26 +1,18 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {gameStates} from "../game/gameStates";
-import {calculateDamage, getEnemies} from "../game/game";
+import {calculateDamage, createPlayer, getEnemies} from "../game/game";
+import {stageStates} from "../game/stageStates";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
         GameState: gameStates.LOADING,
+        StageState: stageStates.IDLE,
         enemies: [],
         enemy: {},
-        player: {
-            Hp: 80,
-            maxHp: 100,
-            moves: 5,
-            debuffs: [{
-                name: 'custom debuff',
-                rounds: 5,
-                description: 'debuff description',
-                img: ''
-            }],
-        },
+        player: {},
         selectedEnemy: 0,
         level: 0,
         score: 0
@@ -36,13 +28,23 @@ export const store = new Vuex.Store({
         getPlayer(state) {
             return state.player;
         },
+
         getSelectedEnemy(state) {
             return state.enemy;
+        },
+
+        getStageState(state) {
+            return state.StageState;
         }
+
     },
     mutations: {
         test(state) {
             console.log('mutation test fired');
+        },
+
+        changeStageState(state, newState) {
+            state.StageState = newState;
         },
 
         initGame(state) {
@@ -54,6 +56,7 @@ export const store = new Vuex.Store({
 
         startGame(state) {
             const enemies = getEnemies(1);
+            state.player = createPlayer();
             state.GameState = gameStates.CHOOSE_ENEMIES;
             state.selectedEnemy = 0;
             state.level = 1;
@@ -62,6 +65,7 @@ export const store = new Vuex.Store({
 
         attackEnemy(state) {
             state.GameState = gameStates.ATTACK_ENEMY;
+            state.StageState = stageStates.IDLE;
             state.enemy = state.enemies[state.selectedEnemy];
         },
 

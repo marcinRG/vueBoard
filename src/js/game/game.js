@@ -30,3 +30,12 @@ export function createEnemy(enemyType) {
     const newEnemy = {...enemyType, Hp: enemyType.maxHp};
     return newEnemy;
 }
+
+export function createPlayer() {
+    return {
+        Hp: 100,
+        maxHp: 100,
+        moves: 5,
+        debuffs: []
+    }
+}

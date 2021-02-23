@@ -12,14 +12,7 @@
 
 <script>
 import MovingLine from "../MovingLine/MovingLine";
-
-const hitBoxStates = {
-  BEGIN: 'begin',
-  POS_X: 'position x',
-  POS_Y: 'position y',
-  END: 'calculated',
-  FINISHED: 'finish'
-};
+import {stageStates} from "../../../game/stageStates";
 
 function move(obj) {
   if (obj.direction === 1 && obj.position >= obj.max) {
@@ -43,36 +36,36 @@ export default {
   },
   methods: {
     buttonClickHandler() {
-      switch (this.componentState) {
-        case hitBoxStates.BEGIN: {
+      switch (this.getStageState) {
+        case stageStates.IDLE: {
           this.runAnimation();
-          this.componentState = hitBoxStates.POS_X;
+          this.$store.commit('changeStageState', stageStates.POS_X);
           break;
         }
-        case hitBoxStates.POS_X: {
-          this.componentState = hitBoxStates.POS_Y;
+        case stageStates.POS_X: {
+          this.$store.commit('changeStageState', stageStates.POS_Y)
           this.runAnimation();
           break;
         }
-        case hitBoxStates.POS_Y: {
-          this.componentState = hitBoxStates.END;
+        case stageStates.POS_Y: {
+          this.$store.commit('changeStageState', stageStates.END);
           break;
         }
-        case hitBoxStates.END: {
+        case stageStates.END: {
           this.$store.commit('inflictDamageToEnemy', {x: this.x.position, y: this.y.position});
-          this.componentState = hitBoxStates.FINISHED;
+          this.$store.commit('changeStageState', stageStates.FINISHED);
         }
       }
 
     },
     move() {
-      if (this.componentState === hitBoxStates.POS_X) {
+      if (this.getStageState === stageStates.POS_X) {
         move(this.x);
       }
-      if (this.componentState === hitBoxStates.POS_Y) {
+      if (this.getStageState === stageStates.POS_Y) {
         move(this.y);
       }
-      if (this.componentState !== hitBoxStates.POS_X && this.componentState !== hitBoxStates.POS_X) {
+      if (this.getStageState !== stageStates.POS_X && this.getStageState !== stageStates.POS_X) {
         cancelAnimationFrame(this.intervalHandler);
       }
     },
@@ -84,34 +77,30 @@ export default {
   },
   computed: {
     getButtonText() {
-      switch (this.componentState) {
-        case hitBoxStates.BEGIN: {
+      switch (this.getStageState) {
+        case stageStates.IDLE: {
           return 'Zacznij';
         }
-        case hitBoxStates.POS_X: {
+        case stageStates.POS_X: {
           return 'Wyznacz X'
         }
-        case hitBoxStates.POS_Y: {
+        case stageStates.POS_Y: {
           return 'Wyznacz Y';
         }
-        case hitBoxStates.END: {
-          return 'Koniec rundy';
+        case stageStates.END: {
+          return 'Atak!';
         }
         default: {
           return 'Nieakt.'
         }
       }
     },
-    getBackButtonDiableState() {
-      if (this.componentState === hitBoxStates.BEGIN || this.componentState === hitBoxStates.FINISHED) {
-        return false;
-      }
-      return true;
+    getStageState() {
+      return this.$store.getters.getStageState;
     }
   },
   data() {
     return {
-      componentState: hitBoxStates.BEGIN,
       x: {
         max: 0,
         position: -3,

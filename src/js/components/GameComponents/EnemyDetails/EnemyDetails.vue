@@ -1,10 +1,10 @@
 <template>
   <div class="enemy-details">
     <div class="enemy-wrapper">
-      <img class="enemy-image" v-bind:src="enemy.enemyImg" v-bind:alt="enemy.enemyClass"/>
+      <img class="enemy-image" v-bind:src="getEnemy.enemyImg" v-bind:alt="getEnemy.enemyClass"/>
       <div class="enemy-stats">
-        <stat-bar v-bind:max="enemy.maxHp" v-bind:value="enemy.Hp" stat-name="Hp"></stat-bar>
-        <attacks-debuffs-wrapper list-name="attacks:" v-bind:elements="enemy.specialAttacks"></attacks-debuffs-wrapper>
+        <stat-bar v-bind:max="getEnemy.maxHp" v-bind:value="getEnemy.Hp" stat-name="Hp"></stat-bar>
+        <attacks-debuffs-wrapper list-name="attacks:" v-bind:elements="getEnemy.specialAttacks"></attacks-debuffs-wrapper>
       </div>
     </div>
     <div class="damage-wrapper"></div>
@@ -17,15 +17,11 @@ import DebuffsAttacksList from "../../GameComponents/Debuffs-Attacks-List/Debuff
 
 export default {
   name: "EnemyDetails",
-  mounted() {
-    console.log(this.enemy);
-  },
   components: {StatBar,
     'attacks-debuffs-wrapper': DebuffsAttacksList},
-  props: {
-    enemy: {
-      type: Object,
-      required: false
+  computed: {
+    getEnemy() {
+      return this.$store.getters.getSelectedEnemy;
     }
   }
 }
