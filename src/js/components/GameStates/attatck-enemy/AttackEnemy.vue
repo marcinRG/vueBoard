@@ -14,7 +14,7 @@
       <hit-box></hit-box>
     </div>
     <div class="enemy-controls">
-      <button>Powrót</button>
+      <button v-bind:disabled="disableButton" v-on:click="handleClickEvent">Powrót</button>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ import HitBox from "../../GameComponents/HitBox/HitBox";
 import EnemyDetails from "../../GameComponents/EnemyDetails/EnemyDetails";
 import PlayerDetails from "../../GameComponents/PlayerDetails/PlayerDetails";
 import FrameWithName from "../../GameComponents/FrameWithName/FrameWithName";
+import {stageStates} from "../../../game/stageStates";
 
 
 export default {
@@ -36,6 +37,17 @@ export default {
   computed: {
     getSelectedEnemy() {
       return this.$store.getters.getSelectedEnemy;
+    },
+    getStageState() {
+      return this.$store.getters.getStageState;
+    },
+    disableButton() {
+      return !(this.getStageState===stageStates.IDLE);
+    }
+  },
+  methods: {
+    handleClickEvent() {
+      this.$store.commit('goBackToSelectEnemyState');
     }
   },
   name: "AttackEnemy"

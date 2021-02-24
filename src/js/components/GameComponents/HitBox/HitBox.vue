@@ -1,6 +1,7 @@
 <template>
   <div class="hit-box">
     <div class="hit-panel" ref="box">
+      <hit-target></hit-target>
       <moving-line v-bind:position="x.position" v-bind:max="x.max" line-type="vertical"></moving-line>
       <moving-line v-bind:position="y.position" v-bind:max="y.max" line-type="horizontal"></moving-line>
     </div>
@@ -13,6 +14,7 @@
 <script>
 import MovingLine from "../MovingLine/MovingLine";
 import {stageStates} from "../../../game/stageStates";
+import HitTarget from "../HitTarget/HitTarget";
 
 function move(obj) {
   if (obj.direction === 1 && obj.position >= obj.max) {
@@ -32,14 +34,15 @@ export default {
     this.y.max = this.$refs.box.getBoundingClientRect().height;
   },
   components: {
+    HitTarget,
     'moving-line': MovingLine
   },
   methods: {
     buttonClickHandler() {
       switch (this.getStageState) {
         case stageStates.IDLE: {
-          this.runAnimation();
           this.$store.commit('changeStageState', stageStates.POS_X);
+          this.runAnimation();
           break;
         }
         case stageStates.POS_X: {
@@ -53,7 +56,8 @@ export default {
         }
         case stageStates.END: {
           this.$store.commit('inflictDamageToEnemy', {x: this.x.position, y: this.y.position});
-          this.$store.commit('changeStageState', stageStates.FINISHED);
+          cancelAnimationFrame(this.intervalHandler);
+          this.resetPositions();
         }
       }
 
@@ -72,6 +76,10 @@ export default {
     runAnimation() {
       this.move();
       this.intervalHandler = requestAnimationFrame(this.runAnimation);
+    },
+    resetPositions() {
+      this.x.position = -3;
+      this.y.position = -3;
     }
 
   },
@@ -79,7 +87,7 @@ export default {
     getButtonText() {
       switch (this.getStageState) {
         case stageStates.IDLE: {
-          return 'Zacznij';
+          return 'Zacznij walkę';
         }
         case stageStates.POS_X: {
           return 'Wyznacz X'
@@ -89,9 +97,6 @@ export default {
         }
         case stageStates.END: {
           return 'Atak!';
-        }
-        default: {
-          return 'Nieakt.'
         }
       }
     },

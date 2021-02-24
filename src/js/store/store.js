@@ -28,15 +28,12 @@ export const store = new Vuex.Store({
         getPlayer(state) {
             return state.player;
         },
-
         getSelectedEnemy(state) {
             return state.enemy;
         },
-
         getStageState(state) {
             return state.StageState;
         }
-
     },
     mutations: {
         test(state) {
@@ -46,7 +43,7 @@ export const store = new Vuex.Store({
         changeStageState(state, newState) {
             state.StageState = newState;
         },
-
+        //game states
         initGame(state) {
             state.level = 0;
             state.selectedEnemy = 0;
@@ -69,6 +66,11 @@ export const store = new Vuex.Store({
             state.enemy = state.enemies[state.selectedEnemy];
         },
 
+        goBackToSelectEnemyState(state) {
+            state.enemy = {};
+            state.GameState = gameStates.CHOOSE_ENEMIES;
+        },
+
         selectEnemy(state, data) {
             state.selectedEnemy = data.id;
         },
@@ -88,6 +90,10 @@ export const store = new Vuex.Store({
         inflictDamageToEnemy(state, obj) {
             console.log('inflict damage to enemy');
             const dmg = calculateDamage(obj.x, obj.y);
+            state.player.moves = state.player.moves - 1;
+            console.log(dmg);
+            state.enemy.Hp = state.enemy.Hp - 25;
+            state.StageState = stageStates.IDLE;
         }
 
     }
