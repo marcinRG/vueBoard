@@ -1,12 +1,26 @@
 <template>
-  <div class="target">
+  <div class="target" v-bind:style="this.position">
     <img class="background-image" src="../../../../images/aim.png"/>
-    <img class="target-image" src="../../../../images/fire-round-button.png"/>
+    <img class="target-image" v-bind:src="this.img"  v-if="this.img"/>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    img: {
+      type: String,
+      required: false
+    },
+    position: {
+      type: Object,
+      required: false
+    }
+  },
+  mounted() {
+    console.log(this.img);
+    console.log(this.position);
+  },
   name: "HitTarget"
 }
 </script>
@@ -16,8 +30,8 @@ export default {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 30px;
-  left: 50px;
+  /*top: 30px;*/
+  /*left: 50px;*/
 }
 
 .target-image {

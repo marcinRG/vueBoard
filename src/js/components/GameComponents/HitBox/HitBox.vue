@@ -1,12 +1,15 @@
 <template>
   <div class="hit-box">
     <div class="hit-panel" ref="box">
-      <hit-target></hit-target>
+      <hit-target v-bind:position="this.imageBlind.position" v-bind:img="this.imageBlind.img"></hit-target>
+      <hit-target v-bind:position="this.imageScratch.position" v-bind:img="this.imageScratch.img"></hit-target>
+      <hit-target v-bind:position="this.imageStun.position" v-bind:img="this.imageStun.img"></hit-target>
       <moving-line v-bind:position="x.position" v-bind:max="x.max" line-type="vertical"></moving-line>
       <moving-line v-bind:position="y.position" v-bind:max="y.max" line-type="horizontal"></moving-line>
     </div>
     <div class="hit-box-controls">
-      <button v-on:click="buttonClickHandler"> {{ this.getButtonText }}</button>
+      <span class="label-details" v-if="this.getPlayer.moves<=0">Brak ruchów</span>
+      <button v-on:click="buttonClickHandler" v-if="this.getPlayer.moves>0"> {{ this.getButtonText }}</button>
     </div>
   </div>
 </template>
@@ -15,6 +18,9 @@
 import MovingLine from "../MovingLine/MovingLine";
 import {stageStates} from "../../../game/stageStates";
 import HitTarget from "../HitTarget/HitTarget";
+import imgBlind from './../../../../images/fire-round-button.png';
+import imgScratch from './../../../../images/paw.png';
+import imgStn from './../../../../images/superpower.png';
 
 function move(obj) {
   if (obj.direction === 1 && obj.position >= obj.max) {
@@ -102,6 +108,9 @@ export default {
     },
     getStageState() {
       return this.$store.getters.getStageState;
+    },
+    getPlayer() {
+      return this.$store.getters.getPlayer;
     }
   },
   data() {
@@ -117,7 +126,28 @@ export default {
         position: -3,
         step: 4,
         direction: 1,
-      }
+      },
+      imageBlind: {
+        img: imgBlind,
+        position: {
+          left: '70px',
+          top: '15px'
+        }
+      },
+      imageStun: {
+        img: imgStn,
+        position: {
+          left: '20px',
+          top: '120px'
+        }
+      },
+      imageScratch: {
+        img: imgScratch,
+        position: {
+          left: '70px',
+          top: '225px'
+        }
+      },
     }
   },
   name: "HitBox"
@@ -139,6 +169,10 @@ export default {
   background-color: white;
   box-shadow: 7px 7px 0 0 black;
   cursor: pointer;
+}
+
+.hit-box .label-details {
+  text-align: center;
 }
 
 .hit-panel {

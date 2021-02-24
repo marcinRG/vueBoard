@@ -47,11 +47,13 @@ export default {
   width: 100%;
   height: 3px;
   background-color: deeppink;
+  z-index: 20;
 }
 
 .line.vertical {
   height: 100%;
   width: 3px;
+  z-index: 20;
   background-color: magenta;
 }
 
