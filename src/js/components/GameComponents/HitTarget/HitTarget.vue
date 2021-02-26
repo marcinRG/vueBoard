@@ -1,7 +1,7 @@
 <template>
   <div class="target" v-bind:style="this.position">
     <img class="background-image" src="../../../../images/aim.png"/>
-    <img class="target-image" v-bind:src="this.img"  v-if="this.img"/>
+    <img class="target-image" v-bind:src="this.img" v-if="this.img"/>
   </div>
 </template>
 
@@ -16,10 +16,6 @@ export default {
       type: Object,
       required: false
     }
-  },
-  mounted() {
-    console.log(this.img);
-    console.log(this.position);
   },
   name: "HitTarget"
 }

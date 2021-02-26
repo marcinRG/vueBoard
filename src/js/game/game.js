@@ -22,12 +22,8 @@ export function getEnemies(level) {
     return enemies;
 }
 
-export function calculateDamage(x, y) {
-    return 25;
-}
-
 export function createEnemy(enemyType) {
-    const newEnemy = {...enemyType, Hp: enemyType.maxHp};
+    const newEnemy = {...enemyType, Hp: enemyType.maxHp, alive: true};
     return newEnemy;
 }
 

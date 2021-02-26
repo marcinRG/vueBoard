@@ -15,9 +15,10 @@
 </template>
 
 <script>
-import MovingLine from "../MovingLine/MovingLine";
-import {stageStates} from "../../../game/stageStates";
-import HitTarget from "../HitTarget/HitTarget";
+import MovingLine from '../MovingLine/MovingLine';
+import {stageStates} from '../../../game/stageStates';
+import HitTarget from '../HitTarget/HitTarget';
+import {hitPointPositions} from '../../../game/hitPointsPositions';
 import imgBlind from './../../../../images/fire-round-button.png';
 import imgScratch from './../../../../images/paw.png';
 import imgStn from './../../../../images/superpower.png';
@@ -118,34 +119,34 @@ export default {
       x: {
         max: 0,
         position: -3,
-        step: 2,
+        step: 1,
         direction: 1,
       },
       y: {
         max: 0,
         position: -3,
-        step: 4,
+        step: 1,
         direction: 1,
       },
       imageBlind: {
         img: imgBlind,
         position: {
-          left: '70px',
-          top: '15px'
+          left: hitPointPositions.blind.x + 'px',
+          top: hitPointPositions.blind.y + 'px'
         }
       },
       imageStun: {
         img: imgStn,
         position: {
-          left: '20px',
-          top: '120px'
+          left: hitPointPositions.stun.x + 'px',
+          top: hitPointPositions.stun.y + 'px'
         }
       },
       imageScratch: {
         img: imgScratch,
         position: {
-          left: '70px',
-          top: '225px'
+          left: hitPointPositions.slash.x + 'px',
+          top: hitPointPositions.slash.y + 'px'
         }
       },
     }
@@ -176,7 +177,7 @@ export default {
 }
 
 .hit-panel {
-  width: 85%;
+  width: 220px;
   margin: 20px auto;
   background-color: white;
   height: 350px;

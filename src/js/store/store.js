@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {gameStates} from "../game/gameStates";
-import {calculateDamage, createPlayer, getEnemies} from "../game/game";
+import {createPlayer, getEnemies} from "../game/game";
+import {calculateDamage} from "../game/damage";
 import {stageStates} from "../game/stageStates";
 
 Vue.use(Vuex);
@@ -90,9 +91,9 @@ export const store = new Vuex.Store({
         inflictDamageToEnemy(state, obj) {
             console.log('inflict damage to enemy');
             const dmg = calculateDamage(obj.x, obj.y);
-            state.player.moves = state.player.moves - 1;
+            //state.player.moves = state.player.moves - 1;
             console.log(dmg);
-            state.enemy.Hp = state.enemy.Hp - 25;
+            //state.enemy.Hp = state.enemy.Hp - 25;
             state.StageState = stageStates.IDLE;
         }
 
