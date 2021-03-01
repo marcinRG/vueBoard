@@ -23,7 +23,7 @@ export function getEnemies(level) {
 }
 
 export function createEnemy(enemyType) {
-    const newEnemy = {...enemyType, Hp: enemyType.maxHp, alive: true};
+    const newEnemy = {...enemyType, Hp: enemyType.maxHp, alive: true, debuffs: []};
     return newEnemy;
 }
 
@@ -32,6 +32,7 @@ export function createPlayer() {
         Hp: 100,
         maxHp: 100,
         moves: 5,
+        attackStrength: 15,
         debuffs: []
     }
 }

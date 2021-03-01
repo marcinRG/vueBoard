@@ -1,13 +1,28 @@
 import {hitBoxSizes, hitPointPositions} from "./hitPointsPositions";
 import {attackNames, attackTypes} from "./attackTypes";
 
-export function calculateDamage(x, y) {
+export function getAttackProperties(x, y) {
     const point = {x, y};
     const target = getAttackTarget(point);
     const distance = distance2Points(point, target);
     const modifiers = getAttackModifiers(distance, target.radius, target.centerRadius, target.damageType);
-    console.log(modifiers);
-    return 25;
+    return {
+        ...modifiers,
+        attack: target.damageType
+    };
+}
+
+export function attackEnemy(player, enemy, attackProperties) {
+    let damage = player.attackStrength;
+    if (attackProperties.isCritical) {
+        damage = damage + player.attackStrength * 0.5;
+    }
+    if (enemy.Hp - damage > 0) {
+        enemy.Hp = enemy.Hp - damage;
+    } else {
+        enemy.Hp = 0;
+        enemy.alive = false;
+    }
 }
 
 function getAttackModifiers(distance, radius, centerRadius, attackType) {
