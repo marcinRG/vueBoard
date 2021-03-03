@@ -24,12 +24,9 @@ export function getDamage(player, enemy, attackProperties) {
     return damage;
 }
 
-export function attackEnemy(player, enemy, attackProperties) {
-    const damage = getDamage(player, enemy, attackProperties);
-    inflictDamageToEnemy(enemy, damage);
-    applyDebbufsToEnemy(enemy, attackProperties);
-    logAttack(player, enemy, damage, attackProperties);
-}
+// export function attackEnemy(player, enemy, attackProperties) {
+//     const damage = getDamage(player, enemy, attackProperties);
+// }
 
 function getAttackModifiers(distance, radius, centerRadius, attackType) {
     if (distance <= radius) {

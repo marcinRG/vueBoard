@@ -1,7 +1,7 @@
 <template>
   <frame-with-name frame-name="Log" v-bind:class="getClass">
     <div class="log-wrapper">
-      <span v-for="logMsg in getGameLog" class="log-msg">{{ logMsg.message }}</span>
+      <span v-for="logMsg in fightLog" class="log-msg">{{ logMsg.message }}</span>
     </div>
   </frame-with-name>
 </template>
@@ -15,11 +15,11 @@ export default {
     'frame-with-name': FrameWithName,
   },
   computed: {
-    getGameLog() {
-      return this.$store.getters.getGameLog;
+    fightLog() {
+      return this.$store.getters.getCurrentEnemyLog;
     },
     getClass() {
-      return (this.getGameLog.length > 0) ? '' : 'hidden';
+      return (this.fightLog.length > 0) ? '' : 'hidden';
     }
   }
 
@@ -29,9 +29,9 @@ export default {
 <style scoped>
 .log-wrapper {
   overflow: hidden;
-  max-height: 80px;
+  height: 85px;
   padding: 5px;
-  max-width: 410px;
+  width: 410px;
 }
 
 .log-msg {
@@ -42,5 +42,16 @@ export default {
   text-shadow: black 2px 1px 0;
 }
 
+.log-msg:nth-of-type(2) {
+  opacity: .65;
+}
+
+.log-msg:nth-of-type(3) {
+  opacity: .35;
+}
+
+.log-msg:nth-of-type(4) {
+  opacity: .15;
+}
 
 </style>

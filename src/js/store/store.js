@@ -2,10 +2,11 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {gameStates} from "../game/gameStates";
 import {getEnemies} from "../game/game";
-import {attackEnemy, getAttackProperties} from "../game/damage";
+import {getAttackProperties, getDamage} from "../game/damage";
 import {stageStates} from "../game/stageStates";
 import {createPlayer} from "../game/player";
-import {initLog} from "../game/fightLog";
+import {createAttackLog, initLog} from "../game/fightLog";
+import {applyDebbufsToEnemy, inflictDamageToEnemy} from "../game/enemy";
 
 Vue.use(Vuex);
 
@@ -19,7 +20,7 @@ export const store = new Vuex.Store({
         player: {},
         selectedEnemy: 0,
         level: 0,
-        score: 0
+        score: 0,
     },
     getters: {
         getEnemies(state) {
@@ -40,8 +41,13 @@ export const store = new Vuex.Store({
         },
         getGameLog(state) {
             return state.log;
+        },
+        getCurrentEnemyLog(state) {
+            const log = [...state.log];
+            return log.reverse().filter((logElem) => {
+                return ((logElem.enemy === state.selectedEnemy) && (logElem.level === state.level));
+            });
         }
-
     },
     mutations: {
         test(state) {
@@ -56,7 +62,6 @@ export const store = new Vuex.Store({
             state.level = 0;
             state.selectedEnemy = 0;
             state.score = 0;
-            state.log = initLog();
             state.GameState = gameStates.START;
         },
 
@@ -66,6 +71,7 @@ export const store = new Vuex.Store({
             state.GameState = gameStates.CHOOSE_ENEMIES;
             state.selectedEnemy = 0;
             state.level = 1;
+            state.log = initLog();
             state.enemies = enemies;
         },
 
@@ -97,9 +103,16 @@ export const store = new Vuex.Store({
         },
 
         inflictDamageToEnemy(state, obj) {
-            console.log('inflict damage to enemy');
             const attackProps = getAttackProperties(obj.x, obj.y);
-            attackEnemy(state.player, state.enemy, attackProps);
+            const damage = getDamage(state.player, state.enemy, attackProps);
+            const newLog = createAttackLog(state.player, state.enemy, damage, attackProps, {
+                level: state.level,
+                enemy: state.selectedEnemy
+            });
+            state.log = [...state.log, newLog];
+            inflictDamageToEnemy(state.enemy, damage);
+            applyDebbufsToEnemy(state.enemy, attackProps);
+
             state.StageState = stageStates.IDLE;
         }
 

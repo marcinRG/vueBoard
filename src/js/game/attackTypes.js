@@ -12,6 +12,7 @@ export const attackTypes = {
     stun: {
         title: 'stun',
         description: 'stun attack',
+        logMsg: 'is stunned',
         criticalChance: 0.1,
         damageRounds: 1,
         effectProbability: {
@@ -30,6 +31,7 @@ export const attackTypes = {
     slash: {
         title: 'slash',
         description: 'slash attack',
+        logMsg: 'is slashed',
         criticalChance: 0.15,
         effectProbability: {
             onCenter: {
@@ -48,6 +50,7 @@ export const attackTypes = {
     blind: {
         title: 'blind',
         description: 'blind attack',
+        logMsg: 'is blinded',
         dot: false,
         damageRounds: 1,
         effectProbability: {
