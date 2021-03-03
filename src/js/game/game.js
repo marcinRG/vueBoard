@@ -1,4 +1,5 @@
 import {enemyTypes} from "./enemyTypes";
+import {createEnemy} from "./enemy";
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 export function getRandomIntInclusive(min, max) {
@@ -20,11 +21,6 @@ export function getEnemies(level) {
         enemies.push(enemy);
     }
     return enemies;
-}
-
-export function createEnemy(enemyType) {
-    const newEnemy = {...enemyType, Hp: enemyType.maxHp, alive: true, debuffs: []};
-    return newEnemy;
 }
 
 export function createPlayer() {

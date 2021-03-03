@@ -1,5 +1,9 @@
 import {hitBoxSizes, hitPointPositions} from "./hitPointsPositions";
 import {attackNames, attackTypes} from "./attackTypes";
+import {applyDebbufsToEnemy, inflictDamageToEnemy} from "./enemy";
+import {logFight} from "./fightLog";
+
+const criticalMultiplier = 1;
 
 export function getAttackProperties(x, y) {
     const point = {x, y};
@@ -12,17 +16,19 @@ export function getAttackProperties(x, y) {
     };
 }
 
-export function attackEnemy(player, enemy, attackProperties) {
+export function getDamage(player, enemy, attackProperties) {
     let damage = player.attackStrength;
     if (attackProperties.isCritical) {
-        damage = damage + player.attackStrength * 0.5;
+        damage = damage + player.attackStrength * criticalMultiplier;
     }
-    if (enemy.Hp - damage > 0) {
-        enemy.Hp = enemy.Hp - damage;
-    } else {
-        enemy.Hp = 0;
-        enemy.alive = false;
-    }
+    return damage;
+}
+
+export function attackEnemy(player, enemy, attackProperties) {
+    const damage = getDamage(player, enemy, attackProperties);
+    inflictDamageToEnemy(enemy, damage);
+    applyDebbufsToEnemy(enemy, attackProperties);
+    logFight(player, enemy, damage, attackProperties);
 }
 
 function getAttackModifiers(distance, radius, centerRadius, attackType) {

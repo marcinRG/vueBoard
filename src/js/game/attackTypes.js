@@ -12,7 +12,7 @@ export const attackTypes = {
     stun: {
         title: 'stun',
         description: 'stun attack',
-        criticalChance: 0.05,
+        criticalChance: 0.1,
         damageRounds: 1,
         effectProbability: {
             onCenter: {
@@ -30,7 +30,7 @@ export const attackTypes = {
     slash: {
         title: 'slash',
         description: 'slash attack',
-        criticalChance: 0.05,
+        criticalChance: 0.15,
         effectProbability: {
             onCenter: {
                 max: .75,
@@ -60,7 +60,7 @@ export const attackTypes = {
                 min: .1
             },
         },
-        criticalChance: 0.1,
+        criticalChance: 0.2,
         img: imgBlind
     }
 };
