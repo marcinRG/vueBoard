@@ -1,7 +1,7 @@
 import {hitBoxSizes, hitPointPositions} from "./hitPointsPositions";
 import {attackNames, attackTypes} from "./attackTypes";
 import {applyDebbufsToEnemy, inflictDamageToEnemy} from "./enemy";
-import {logFight} from "./fightLog";
+import {logAttack} from "./fightLog";
 
 const criticalMultiplier = 1;
 
@@ -28,7 +28,7 @@ export function attackEnemy(player, enemy, attackProperties) {
     const damage = getDamage(player, enemy, attackProperties);
     inflictDamageToEnemy(enemy, damage);
     applyDebbufsToEnemy(enemy, attackProperties);
-    logFight(player, enemy, damage, attackProperties);
+    logAttack(player, enemy, damage, attackProperties);
 }
 
 function getAttackModifiers(distance, radius, centerRadius, attackType) {

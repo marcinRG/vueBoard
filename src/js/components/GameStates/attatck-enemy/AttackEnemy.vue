@@ -4,10 +4,10 @@
       <div>
         <frame-with-name frame-name="Enemy">
           <enemy-details></enemy-details>
+          <fight-log></fight-log>
         </frame-with-name>
         <frame-with-name frame-name="Player">
           <player-details></player-details>
-
         </frame-with-name>
       </div>
 
@@ -25,10 +25,12 @@ import EnemyDetails from "../../GameComponents/EnemyDetails/EnemyDetails";
 import PlayerDetails from "../../GameComponents/PlayerDetails/PlayerDetails";
 import FrameWithName from "../../GameComponents/FrameWithName/FrameWithName";
 import {stageStates} from "../../../game/stageStates";
+import FightLog from "../../GameComponents/FightLog/FightLog";
 
 
 export default {
   components: {
+    FightLog,
     'player-details': PlayerDetails,
     'hit-box': HitBox,
     'enemy-details': EnemyDetails,

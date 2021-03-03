@@ -25,6 +25,10 @@ export default {
      width: 100%;
   }
 
+  .hidden {
+    display: none;
+  }
+
   .frame-name {
     position: absolute;
     color: white;

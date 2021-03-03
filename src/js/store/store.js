@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {gameStates} from "../game/gameStates";
-import {createPlayer, getEnemies} from "../game/game";
+import {getEnemies} from "../game/game";
 import {attackEnemy, getAttackProperties} from "../game/damage";
 import {stageStates} from "../game/stageStates";
+import {createPlayer} from "../game/player";
+import {initLog} from "../game/fightLog";
 
 Vue.use(Vuex);
 
@@ -11,6 +13,7 @@ export const store = new Vuex.Store({
     state: {
         GameState: gameStates.LOADING,
         StageState: stageStates.IDLE,
+        log: [],
         enemies: [],
         enemy: {},
         player: {},
@@ -34,7 +37,11 @@ export const store = new Vuex.Store({
         },
         getStageState(state) {
             return state.StageState;
+        },
+        getGameLog(state) {
+            return state.log;
         }
+
     },
     mutations: {
         test(state) {
@@ -49,6 +56,7 @@ export const store = new Vuex.Store({
             state.level = 0;
             state.selectedEnemy = 0;
             state.score = 0;
+            state.log = initLog();
             state.GameState = gameStates.START;
         },
 

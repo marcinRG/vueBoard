@@ -31,7 +31,7 @@ export default {
 .enemy-details {
   padding: 7px;
   width: 440px;
-  height: 250px;
+  height: 180px;
   font-size: 14px;
 }
 

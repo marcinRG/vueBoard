@@ -14,8 +14,11 @@ export function inflictDamageToEnemy(enemy, damage, attackProperties) {
 
 export function applyDebbufsToEnemy(enemy, attackProperties) {
     if (enemy.alive) {
+
         console.log(enemy.debuffs);
     }
 }
+
+
 
 

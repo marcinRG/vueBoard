@@ -23,12 +23,4 @@ export function getEnemies(level) {
     return enemies;
 }
 
-export function createPlayer() {
-    return {
-        Hp: 100,
-        maxHp: 100,
-        moves: 5,
-        attackStrength: 15,
-        debuffs: []
-    }
-}
+
