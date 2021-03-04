@@ -54,4 +54,8 @@ export default {
   opacity: .15;
 }
 
+.log-msg:nth-of-type(5) {
+  opacity: .05;
+}
+
 </style>

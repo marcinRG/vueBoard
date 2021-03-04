@@ -4,9 +4,9 @@ import {gameStates} from "../game/gameStates";
 import {getEnemies} from "../game/game";
 import {getAttackProperties, getDamage} from "../game/damage";
 import {stageStates} from "../game/stageStates";
-import {createPlayer} from "../game/player";
+import {createPlayer, doAction} from "../game/player";
 import {createAttackLog, initLog} from "../game/fightLog";
-import {applyDebbufsToEnemy, inflictDamageToEnemy} from "../game/enemy";
+import {applyDebuffsToEnemy, inflictDamageToEnemy} from "../game/enemy";
 
 Vue.use(Vuex);
 
@@ -111,7 +111,10 @@ export const store = new Vuex.Store({
             });
             state.log = [...state.log, newLog];
             inflictDamageToEnemy(state.enemy, damage);
-            applyDebbufsToEnemy(state.enemy, attackProps);
+            state.player.debuffs = applyDebuffsToEnemy(state.enemy, attackProps);
+            console.log(state.player.debuffs);
+
+            state.player = doAction(state.player, attackProps);
 
             state.StageState = stageStates.IDLE;
         }

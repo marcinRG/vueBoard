@@ -119,13 +119,13 @@ export default {
       x: {
         max: 0,
         position: -3,
-        step: 1,
+        step: 2.5,
         direction: 1,
       },
       y: {
         max: 0,
         position: -3,
-        step: 1,
+        step: 5,
         direction: 1,
       },
       imageBlind: {

@@ -1,9 +1,8 @@
 import {hitBoxSizes, hitPointPositions} from "./hitPointsPositions";
 import {attackNames, attackTypes} from "./attackTypes";
-import {applyDebbufsToEnemy, inflictDamageToEnemy} from "./enemy";
-import {logAttack} from "./fightLog";
 
 const criticalMultiplier = 1;
+export const miss = 'miss';
 
 export function getAttackProperties(x, y) {
     const point = {x, y};
@@ -17,16 +16,15 @@ export function getAttackProperties(x, y) {
 }
 
 export function getDamage(player, enemy, attackProperties) {
-    let damage = player.attackStrength;
-    if (attackProperties.isCritical) {
-        damage = damage + player.attackStrength * criticalMultiplier;
+    let damage = 0
+    if (attackProperties.attack !== miss) {
+        damage = player.attackStrength;
+        if (attackProperties.isCritical) {
+            damage = damage + player.attackStrength * criticalMultiplier;
+        }
     }
     return damage;
 }
-
-// export function attackEnemy(player, enemy, attackProperties) {
-//     const damage = getDamage(player, enemy, attackProperties);
-// }
 
 function getAttackModifiers(distance, radius, centerRadius, attackType) {
     if (distance <= radius) {
@@ -42,7 +40,7 @@ function getAttackModifiers(distance, radius, centerRadius, attackType) {
 
         }
         const onTarget = attackTypes[attackType].effectProbability.onTarget;
-        const probabilityLevel = transformXToY(distance, 0, centerRadius, onTarget.max, onTarget.min);
+        const probabilityLevel = transformXToY(distance, 0, radius, onTarget.max, onTarget.min);
         return {
             isCritical: false,
             attackModifier,
@@ -52,7 +50,7 @@ function getAttackModifiers(distance, radius, centerRadius, attackType) {
 }
 
 function getAttackTarget(point) {
-    let obj = {damageType: 'miss'};
+    let obj = {damageType: miss};
     const names = Object.keys(attackNames);
     for (let attackName of names) {
         let target = getCenterAndRadiusOfTarget(attackName);
