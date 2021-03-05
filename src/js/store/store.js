@@ -42,6 +42,12 @@ export const store = new Vuex.Store({
         getGameLog(state) {
             return state.log;
         },
+        getEnemyDebuffs(state) {
+            const debuffs = [...state.enemy.debuffs];
+            return debuffs.map((debuff) => {
+                return debuff.name;
+            });
+        },
         getCurrentEnemyLog(state) {
             const log = [...state.log];
             return log.reverse().filter((logElem) => {
@@ -110,10 +116,11 @@ export const store = new Vuex.Store({
                 enemy: state.selectedEnemy
             });
             state.log = [...state.log, newLog];
-            inflictDamageToEnemy(state.enemy, damage);
-            state.player.debuffs = applyDebuffsToEnemy(state.enemy, attackProps);
-            console.log(state.player.debuffs);
-
+            const HpAliveState = inflictDamageToEnemy(state.enemy, damage);
+            console.log(HpAliveState);
+            state.enemy.Hp = HpAliveState.Hp;
+            state.enemy.alive = HpAliveState.alive;
+            state.enemy.debuffs = applyDebuffsToEnemy(state.enemy, attackProps);
             state.player = doAction(state.player, attackProps);
 
             state.StageState = stageStates.IDLE;

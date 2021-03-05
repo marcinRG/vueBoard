@@ -6,35 +6,44 @@ export function createEnemy(enemyType) {
 }
 
 export function inflictDamageToEnemy(enemy, damage, attackProperties) {
-    if (enemy.Hp - damage > 0) {
-        enemy.Hp = enemy.Hp - damage;
+    let Hp = enemy.Hp;
+    let alive = enemy.alive;
+    if (Hp - damage > 0) {
+        Hp = Hp - damage;
     } else {
-        enemy.Hp = 0;
-        enemy.alive = false;
+        Hp = 0;
     }
+    if (Hp <= 0) {
+        alive = false;
+    }
+
+    return {
+        Hp,
+        alive
+    };
 }
 
 export function applyDebuffsToEnemy(enemy, attackProperties) {
+    let debuffs = [...enemy.debuffs];
     if (enemy.alive && attackProperties.applyEffect) {
-        const found = enemy.debuffs.find((debuff) => {
+        const found = debuffs.find((debuff) => {
             return debuff.name === attackProperties.attack;
         });
         if (found && found >= 0) {
-            return refreshDebuff(attackProperties.attack, found);
+            return refreshDebuff(debuffs, attackProperties.attack, found);
         }
-        return addDebuff(enemy, attackProperties.attack);
+        debuffs = addDebuff(debuffs, attackProperties.attack);
     }
-    return [];
+    return debuffs;
 }
 
-function refreshDebuff(enemy, debufName, found) {
-    let debuffs = [...enemy.debuffs];
+function refreshDebuff(debuffs, debufName, found) {
     debuffs[found] = createDebuff(debufName);
     return debuffs;
 }
 
-function addDebuff(enemy, debufName) {
-    return [...enemy.debuffs, createDebuff(debufName)];
+function addDebuff(debuffs, debufName) {
+    return [...debuffs, createDebuff(debufName)];
 }
 
 function createDebuff(debufName) {
