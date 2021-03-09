@@ -9,7 +9,10 @@
     </div>
     <div class="hit-box-controls">
       <span class="label-details" v-if="this.getPlayer.moves<=0">Brak ruchów</span>
-      <button v-on:click="buttonClickHandler" v-if="this.getPlayer.moves>0"> {{ this.getButtonText }}</button>
+      <span class="label-details" v-if="this.getSelectedEnemy.Hp<=0">Przeciwnik nie żyje</span>
+      <button v-on:click="buttonClickHandler" v-if="this.getPlayer.moves>0 && this.getSelectedEnemy.Hp>0">
+        {{ this.getButtonText }}
+      </button>
     </div>
   </div>
 </template>
@@ -94,7 +97,7 @@ export default {
     getButtonText() {
       switch (this.getStageState) {
         case stageStates.IDLE: {
-          return 'Zacznij walkę';
+          return 'Zacznij atak!';
         }
         case stageStates.POS_X: {
           return 'Wyznacz X'
@@ -112,6 +115,9 @@ export default {
     },
     getPlayer() {
       return this.$store.getters.getPlayer;
+    },
+    getSelectedEnemy() {
+      return this.$store.getters.getSelectedEnemy;
     }
   },
   data() {

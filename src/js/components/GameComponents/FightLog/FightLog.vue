@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import FrameWithName from "../FrameWithName/FrameWithName";
+import FrameWithName from "../../FrameWithName/FrameWithName";
 
 export default {
   name: "FightLog",

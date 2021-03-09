@@ -94,18 +94,21 @@ export const store = new Vuex.Store({
 
         selectEnemy(state, data) {
             state.selectedEnemy = data.id;
+            state.enemy = state.enemies[state.selectedEnemy];
         },
 
         selectEnemyUp(state) {
             if (state.selectedEnemy < state.enemies.length - 1) {
                 state.selectedEnemy = state.selectedEnemy + 1;
             }
+            state.enemy = state.enemies[state.selectedEnemy];
         },
 
         selectEnemyDown(state) {
             if (state.selectedEnemy > 0) {
                 state.selectedEnemy = state.selectedEnemy - 1;
             }
+            state.enemy = state.enemies[state.selectedEnemy];
         },
 
         inflictDamageToEnemy(state, obj) {

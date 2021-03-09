@@ -1,19 +1,46 @@
 <template>
-  <div class="debuff">
+  <div class="debuff" v-on:mouseover="onMouseOver" v-on:mouseout="onMouseOut">
     <img class="debuff-img" v-bind:src="this.getDebuff.img" v-bind:alt="this.getDebuff.name"/>
+    <tooltip v-bind:show-tool-tip="showToolTip" v-bind:position-x="positionX" v-bind:position-y="positionY">
+      <h4>{{ this.getDebuff.title }}</h4>
+      <p>{{ this.getDebuff.description }}</p>
+    </tooltip>
   </div>
 </template>
 
 <script>
 import {attackTypes} from './../../../game/attackTypes';
+import Tooltip from "../../Tooltip/Tooltip";
+
+const toolTipOffset = 4;
 
 export default {
   name: "Debuff",
+  components: {Tooltip},
   props: {
     name: {
       type: String,
       required: false
     }
+  },
+  data() {
+    return {
+      showToolTip: false,
+      positionX: 0,
+      positionY: 0,
+    }
+  },
+  methods: {
+    onMouseOver(event) {
+      const elementPos = event.target.getBoundingClientRect();
+      this.positionY = elementPos.y + elementPos.height + toolTipOffset;
+      this.positionX = elementPos.x + elementPos.width - toolTipOffset;
+      this.showToolTip = true;
+    },
+    onMouseOut() {
+      this.showToolTip = false;
+    }
+
   },
   computed: {
     getDebuff() {
@@ -37,6 +64,7 @@ export default {
   height: 20px;
   display: block;
   margin: 5px auto;
+  pointer-events: none;
 }
 
 </style>

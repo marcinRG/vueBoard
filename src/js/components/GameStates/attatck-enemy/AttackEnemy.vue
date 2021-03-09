@@ -23,7 +23,7 @@
 import HitBox from "../../GameComponents/HitBox/HitBox";
 import EnemyDetails from "../../GameComponents/EnemyDetails/EnemyDetails";
 import PlayerDetails from "../../GameComponents/PlayerDetails/PlayerDetails";
-import FrameWithName from "../../GameComponents/FrameWithName/FrameWithName";
+import FrameWithName from "../../FrameWithName/FrameWithName";
 import {stageStates} from "../../../game/stageStates";
 import FightLog from "../../GameComponents/FightLog/FightLog";
 

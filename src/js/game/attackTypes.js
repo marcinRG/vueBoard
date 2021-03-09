@@ -11,7 +11,7 @@ export const attackNames = {
 export const attackTypes = {
     stun: {
         title: 'stun',
-        description: 'stun attack',
+        description: 'This is stun attack description',
         logMsg: 'is stunned',
         criticalChance: 0.1,
         damageRounds: 1,
@@ -30,7 +30,7 @@ export const attackTypes = {
     },
     slash: {
         title: 'slash',
-        description: 'slash attack',
+        description: 'This is slash attack description',
         logMsg: 'is slashed',
         criticalChance: 0.15,
         effectProbability: {
@@ -49,7 +49,7 @@ export const attackTypes = {
     },
     blind: {
         title: 'blind',
-        description: 'blind attack',
+        description: 'This is blind attack description',
         logMsg: 'is blinded',
         dot: false,
         damageRounds: 1,

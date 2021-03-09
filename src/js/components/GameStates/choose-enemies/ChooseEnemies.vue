@@ -15,7 +15,14 @@
         <button v-on:click="buttonDownHandler">&#9668;</button>
         <button v-on:click="buttonUpHandler">&#9654;</button>
       </div>
-      <button v-on:click="attackButtonHandler">Atakuj !!!</button>
+      <div>
+        <button v-on:click="attackButtonHandler" v-bind:disabled="this.getEnemies.enemy.Hp<=0">Atakuj !!!
+        </button>
+      </div>
+      <div>
+        <button v-on:click="attackButtonHandler">Zakończenie rundy</button>
+      </div>
+
     </div>
     <button v-on:click="checkState">re-roll</button>
   </div>
@@ -28,6 +35,7 @@ export default {
   name: "ChooseEnemies",
   mounted() {
     this.setFocus();
+    console.log(this.getEnemies)
   },
   components: {'enemy': EnemyListComponent},
   methods: {
