@@ -88,7 +88,6 @@ export const store = new Vuex.Store({
         },
 
         goBackToSelectEnemyState(state) {
-            state.enemy = {};
             state.GameState = gameStates.CHOOSE_ENEMIES;
         },
 
