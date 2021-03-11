@@ -1,6 +1,7 @@
 <template>
   <div class='game-panels'>
     <component v-bind:is='getComponentName'></component>
+    <splash-screen></splash-screen>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import Loading from './loading/Loading';
 import Start from './start/Start';
 import ChooseEnemies from './choose-enemies/ChooseEnemies';
 import AttackEnemy from "./attatck-enemy/AttackEnemy";
+import SplashScreen from "../SplashScreen/SplashScreen";
 
 function getComponent(gameState) {
   switch (gameState) {
@@ -38,6 +40,7 @@ function getComponent(gameState) {
 export default {
   name: 'Game',
   components: {
+    SplashScreen,
     'game-loading': Loading,
     'game-start': Start,
     'choose-enemies': ChooseEnemies,
