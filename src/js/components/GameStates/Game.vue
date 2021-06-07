@@ -1,7 +1,7 @@
 <template>
   <div class='game-panels'>
     <component v-bind:is='getComponentName'></component>
-    <splash-screen v-bind:duration=2000 v-bind:visible="this.isVisible" v-bind:action="this.someAction"></splash-screen>
+    <splash-screen v-bind:duration=5000 v-bind:visible="this.isVisible" v-bind:action="this.someAction"></splash-screen>
     <button v-on:click="changeVisibility">Set visible</button>
   </div>
 </template>

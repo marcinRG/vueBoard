@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="setClassName">
     <div>
-       Komponent
+      Komponent
     </div>
     <div>
       {{ duration }}
@@ -38,13 +38,16 @@ export default {
     }
   },
   watch: {
-    visible: function(value) {
-      console.log(this)
+    visible: function (value) {
       console.log('visible changed');
-      if (this.action) {
-        console.log(this.action)
+      console.log(`value: ${value} , duration: ${this.duration}`)
+      if (value && this.action && this.duration) {
+        this.timeHandler = setTimeout(() => {
+          this.action();
+        }, 10000);
+      } else {
+        this.timeHandler = null;
       }
-      console.log(value);
     }
   },
   computed: {
