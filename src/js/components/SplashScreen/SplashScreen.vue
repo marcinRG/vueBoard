@@ -28,9 +28,7 @@ export default {
       type: Boolean,
       required: false
     },
-  },
-  mounted() {
-    console.log(this)
+
   },
   methods: {
     showsSplashScreen(show) {
@@ -39,12 +37,10 @@ export default {
   },
   watch: {
     visible: function (value) {
-      console.log('visible changed');
-      console.log(`value: ${value} , duration: ${this.duration}`)
       if (value && this.action && this.duration) {
         this.timeHandler = setTimeout(() => {
           this.action();
-        }, 10000);
+        }, this.duration);
       } else {
         this.timeHandler = null;
       }
@@ -52,24 +48,12 @@ export default {
   },
   computed: {
     setClassName() {
-      console.log('props changed setClassName')
       let className = 'splash-screen'
       if (this.visible) {
         className = className + ' ' + 'show';
       }
       return className;
     },
-
-    // showSplashScreen() {
-    //   let handler = null;
-    //   console.log('show spashscreen')
-    //   if (this.visible && this.duration && this.action) {
-    //     handler = setTimeout(() => {
-    //       this.action();
-    //     }, 3000);
-    //   }
-    //   return handler
-    // }
   },
   data() {
     return {
