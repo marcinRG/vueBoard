@@ -1,5 +1,9 @@
 <template>
   <div class="enemy-board">
+    <splash-screen v-bind:visible=this.isVisible
+                   v-bind:hasTimeout=false>
+      <div>To jest jakiś tekst</div>
+    </splash-screen>
     <div class="enemy-container" v-on:keyup="keyEventHandler">
       <div class="enemies-list" tabindex="0"
            ref="enemyBoardRef" v-on:click="clickEventHandler">
@@ -30,6 +34,7 @@
 
 <script>
 import EnemyListComponent from "../../GameComponents/EnemyListElement/EnemyListComponent";
+import SplashScreen from "../../SplashScreen/SplashScreen";
 
 export default {
   name: "ChooseEnemies",
@@ -37,8 +42,19 @@ export default {
     this.setFocus();
     console.log(this.getEnemies)
   },
-  components: {'enemy': EnemyListComponent},
+  data() {
+    return {
+      isVisible: true
+    }
+  },
+  components: {
+    'enemy': EnemyListComponent,
+    'splash-screen': SplashScreen
+  },
   methods: {
+    someAction() {
+      console.log('action')
+    },
     checkState() {
       this.$store.commit('startGame');
     },
@@ -86,6 +102,7 @@ export default {
 <style scoped>
 .enemy-board {
   margin: 0 auto;
+  /*position: relative;*/
 }
 
 .enemy-board button {

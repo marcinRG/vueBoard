@@ -1,14 +1,6 @@
 <template>
   <div v-bind:class="setClassName">
-    <div>
-      Komponent
-    </div>
-    <div>
-      {{ duration }}
-    </div>
-    <div>
-      {{ visible }}
-    </div>
+    <slot></slot>
   </div>
 </template>
 
@@ -28,6 +20,11 @@ export default {
       type: Boolean,
       required: false
     },
+    hasTimeout: {
+      type: Boolean,
+      required: false
+    }
+
 
   },
   methods: {
@@ -37,7 +34,7 @@ export default {
   },
   watch: {
     visible: function (value) {
-      if (value && this.action && this.duration) {
+      if (value && this.action && this.duration && this.hasTimeout) {
         this.timeHandler = setTimeout(() => {
           this.action();
         }, this.duration);
@@ -69,7 +66,7 @@ export default {
   z-index: 200;
   position: fixed;
   width: 100%;
-  height: 20vh;
+  height: 100vh;
   background-color: goldenrod;
   top: 0;
   left: 0;
