@@ -3,6 +3,7 @@
 bower_components
 _resources
 .cache
+nbproject
 
 ### Node template
 # Logs
