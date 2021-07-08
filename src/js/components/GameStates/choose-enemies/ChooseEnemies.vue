@@ -127,9 +127,9 @@ export default {
 
 .buttons-wrapper {
   margin-top: 45px;
-  display: grid;
+  display: flex;
   width: 100%;
-  background-color: deeppink;
+  justify-content: center;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
