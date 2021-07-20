@@ -8,7 +8,7 @@
             <p>Czy chcesz zakończyć rundę?</p>
             <div class="buttons-wrapper">
               <button v-on:click="hideScreen">Anuluj</button>
-              <button v-on:click="hideScreen">Zakończ</button>
+              <button v-on:click="goToDefence">Zakończ</button>
             </div>
           </div>
         </frame-with-name>
@@ -34,7 +34,7 @@
         </button>
       </div>
       <div>
-        <button v-on:click="attackButtonHandler">Zakończenie rundy</button>
+        <button v-on:click="showQuestion">Zakończenie rundy</button>
       </div>
 
     </div>
@@ -51,11 +51,10 @@ export default {
   name: "ChooseEnemies",
   mounted() {
     this.setFocus();
-    console.log(this.getEnemies)
   },
   data() {
     return {
-      isVisible: true
+      isVisible: false
     }
   },
   components: {
@@ -66,6 +65,13 @@ export default {
   methods: {
     hideScreen() {
       this.isVisible = false;
+    },
+    showQuestion() {
+      this.isVisible = true
+    },
+    goToDefence() {
+      this.isVisible = false;
+      this.$store.commit('defendPlayer');
     },
     someAction() {
       console.log('action')

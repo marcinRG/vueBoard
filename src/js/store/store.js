@@ -81,6 +81,10 @@ export const store = new Vuex.Store({
             state.enemies = enemies;
         },
 
+        defendPlayer(state) {
+            state.GameState = gameStates.DEFEND_PLAYER;
+        },
+
         attackEnemy(state) {
             state.GameState = gameStates.ATTACK_ENEMY;
             state.StageState = stageStates.IDLE;

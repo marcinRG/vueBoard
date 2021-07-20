@@ -12,6 +12,7 @@ import Start from './start/Start';
 import ChooseEnemies from './choose-enemies/ChooseEnemies';
 import AttackEnemy from "./attatck-enemy/AttackEnemy";
 import SplashScreen from "../SplashScreen/SplashScreen";
+import DefendPhase from "./defend-phase/DefendPhase";
 
 function getComponent(gameState) {
   switch (gameState) {
@@ -42,7 +43,8 @@ export default {
     'game-loading': Loading,
     'game-start': Start,
     'choose-enemies': ChooseEnemies,
-    'attack-enemy': AttackEnemy
+    'attack-enemy': AttackEnemy,
+    'defend-player': DefendPhase
   },
   computed: {
     gameState() {
