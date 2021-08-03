@@ -4,7 +4,8 @@
       <img class="enemy-image" v-bind:src="getEnemy.enemyImg" v-bind:alt="getEnemy.enemyClass"/>
       <div class="enemy-stats">
         <stat-bar v-bind:max="getEnemy.maxHp" v-bind:value="getEnemy.Hp" stat-name="Hp"></stat-bar>
-        <attacks-debuffs-wrapper list-name="attacks:" v-bind:elements="getEnemy.specialAttacks"></attacks-debuffs-wrapper>
+        <attacks-debuffs-wrapper list-name="attacks:"
+                                 v-bind:elements="getEnemy.specialAttacks"></attacks-debuffs-wrapper>
         <attacks-debuffs-wrapper list-name="debuffs:" v-bind:elements="getDebuffs"></attacks-debuffs-wrapper>
       </div>
     </div>
@@ -18,8 +19,10 @@ import DebuffsAttacksList from "../../GameComponents/Debuffs-Attacks-List/Debuff
 
 export default {
   name: "EnemyDetails",
-  components: {StatBar,
-    'attacks-debuffs-wrapper': DebuffsAttacksList},
+  components: {
+    StatBar,
+    'attacks-debuffs-wrapper': DebuffsAttacksList
+  },
   computed: {
     getEnemy() {
       return this.$store.getters.getSelectedEnemy;
