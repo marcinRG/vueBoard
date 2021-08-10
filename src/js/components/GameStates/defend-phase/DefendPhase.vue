@@ -1,9 +1,6 @@
 <template>
-  <div>
+  <div class="defense-phase-container">
     <p>Defence</p>
-    <div></div>
-    <span>{{ this.getEnemies.enemies.length }}</span>
-    <span>{{ this.getPlayer }}</span>
     <frame-with-name frame-name="Enemies">
       <div class="enemies-container">
         <div v-for="(enemy,index) in getEnemies.enemies" class="enemy-miniature">
@@ -49,18 +46,26 @@ export default {
 
 <style scoped>
 
+.defense-phase-container {
+  max-width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .enemies-container {
   display: flex;
+  justify-content: center;
 }
 
 .enemy-miniature {
-  padding: 30px;
-  width: 150px;
+  padding: 10px;
+  margin: 0 15px;
+  min-width: 150px;
 }
 
 .enemy-image-small {
-  /*display: block;*/
-  /*margin: 0 auto;*/
+  display: block;
+  margin: 0 auto;
   height: 90px;
   width: auto;
   background-color: white;

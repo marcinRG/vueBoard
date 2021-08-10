@@ -27,9 +27,9 @@ export default {
 <style scoped>
 
 .attacks-debuffs-wrapper {
-  display: grid;
-  grid-template-columns: auto repeat(5, 30px);
-  grid-column-gap: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   padding: 10px 0;
 }
 

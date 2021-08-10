@@ -57,6 +57,7 @@ export default {
   background-color: white;
   border: 1px solid white;
   box-shadow: 5px 5px 0 0 black;
+  margin: 5px;
 }
 
 .debuff-img {
