@@ -29,7 +29,7 @@ export default {
 .attacks-debuffs-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 10px 0;
 }
 

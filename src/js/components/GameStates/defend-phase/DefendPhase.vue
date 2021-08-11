@@ -1,11 +1,12 @@
 <template>
   <div class="defense-phase-container">
-    <p>Defence</p>
     <frame-with-name frame-name="Enemies">
       <div class="enemies-container">
         <div v-for="(enemy,index) in getEnemies.enemies" class="enemy-miniature">
-          <img class="enemy-image-small" v-bind:src="enemy.enemyImg" v-bind:alt="enemy.enemyClass"/>
-          <attacks-debuffs-wrapper list-name="" v-bind:elements="enemy.specialAttacks"></attacks-debuffs-wrapper>
+          <frame-with-name>
+            <img class="enemy-image-small" v-bind:src="enemy.enemyImg" v-bind:alt="enemy.enemyClass"/>
+            <attacks-debuffs-wrapper list-name="" v-bind:elements="enemy.specialAttacks"></attacks-debuffs-wrapper>
+          </frame-with-name>
         </div>
       </div>
     </frame-with-name>
@@ -13,7 +14,7 @@
       <stat-bar stat-name="HP" v-bind:value="this.getPlayer.Hp" v-bind:max="this.getPlayer.maxHp"></stat-bar>
     </frame-with-name>
     <div>
-      <button>Zakończ rundę</button>
+      <button v-on:click="showEnemy">Zakończ rundę</button>
     </div>
   </div>
 </template>
@@ -39,7 +40,11 @@ export default {
     getPlayer() {
       return this.$store.getters.getPlayer;
     }
-
+  },
+  methods: {
+    showEnemy() {
+      console.log(this.getEnemies.enemies[0].specialAttacks)
+    }
   }
 }
 </script>
@@ -47,7 +52,8 @@ export default {
 <style scoped>
 
 .defense-phase-container {
-  max-width: 50%;
+  padding: 50px;
+  max-width: 60%;
   margin: 0 auto;
   text-align: center;
 }
