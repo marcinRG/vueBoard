@@ -13,6 +13,7 @@
     <frame-with-name frame-name="Player">
       <stat-bar stat-name="HP" v-bind:value="this.getPlayer.Hp" v-bind:max="this.getPlayer.maxHp"></stat-bar>
     </frame-with-name>
+    <fight-log v-bind:log-items="this.getEnemyAttacks"></fight-log>
     <div>
       <button v-on:click="showEnemy">Zakończ rundę</button>
     </div>
@@ -39,6 +40,9 @@ export default {
     },
     getPlayer() {
       return this.$store.getters.getPlayer;
+    },
+    getEnemyAttacks() {
+      return this.$store.getters.getEnemyAttacks;
     }
   },
   methods: {

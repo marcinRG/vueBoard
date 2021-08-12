@@ -27,12 +27,13 @@ export function applyDebuffsToEnemy(enemy, attackProperties) {
     let debuffs = [...enemy.debuffs];
     if (enemy.alive && attackProperties.applyEffect) {
         const found = debuffs.find((debuff) => {
-            return debuff.name === attackProperties.attack;
+            return (debuff.name === attackProperties.attack);
         });
-        if (found && found >= 0) {
+        if (found) {
             return refreshDebuff(debuffs, attackProperties.attack, found);
         }
-        debuffs = addDebuff(debuffs, attackProperties.attack);
+        return addDebuff(debuffs, attackProperties.attack);
+
     }
     return debuffs;
 }

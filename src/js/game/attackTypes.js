@@ -35,8 +35,8 @@ export const attackTypes = {
         criticalChance: 0.15,
         effectProbability: {
             onCenter: {
-                max: .75,
-                min: .45
+                max: .95,
+                min: .75
             },
             onTarget: {
                 max: .3,

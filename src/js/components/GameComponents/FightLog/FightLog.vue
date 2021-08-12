@@ -1,7 +1,7 @@
 <template>
   <frame-with-name frame-name="Log" v-bind:class="getClass">
     <div class="log-wrapper">
-      <span v-for="logMsg in fightLog" class="log-msg">{{ logMsg.message }}</span>
+      <span v-for="logMsg in logItems" class="log-msg">{{ logMsg.message }}</span>
     </div>
   </frame-with-name>
 </template>
@@ -11,16 +11,22 @@ import FrameWithName from "../../FrameWithName/FrameWithName";
 
 export default {
   name: "FightLog",
+
   components: {
     'frame-with-name': FrameWithName,
   },
-  computed: {
-    fightLog() {
-      return this.$store.getters.getCurrentEnemyLog;
-    },
-    getClass() {
-      return (this.fightLog.length > 0) ? '' : 'hidden';
+  props: {
+    logItems: {
+      type: Array,
+      required: false
     }
+  },
+  computed: {
+    getClass() {
+      return (this.logItems.length > 0) ? '' : 'hidden';
+    }
+  },
+  methods: {
   }
 
 }

@@ -53,6 +53,10 @@ export const store = new Vuex.Store({
             return log.reverse().filter((logElem) => {
                 return ((logElem.enemy === state.selectedEnemy) && (logElem.level === state.level));
             });
+        },
+        getEnemyAttacks(state) {
+          const log = [];
+          return log;
         }
     },
     mutations: {
@@ -123,7 +127,6 @@ export const store = new Vuex.Store({
             });
             state.log = [...state.log, newLog];
             const HpAliveState = inflictDamageToEnemy(state.enemy, damage);
-            console.log(HpAliveState);
             state.enemy.Hp = HpAliveState.Hp;
             state.enemy.alive = HpAliveState.alive;
             state.enemy.debuffs = applyDebuffsToEnemy(state.enemy, attackProps);

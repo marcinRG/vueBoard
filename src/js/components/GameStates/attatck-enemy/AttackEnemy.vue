@@ -4,7 +4,7 @@
       <div>
         <frame-with-name frame-name="Enemy">
           <enemy-details></enemy-details>
-          <fight-log></fight-log>
+          <fight-log v-bind:log-items="fightLog"></fight-log>
         </frame-with-name>
         <frame-with-name frame-name="Player">
           <player-details></player-details>
@@ -45,7 +45,10 @@ export default {
     },
     disableButton() {
       return !(this.getStageState===stageStates.IDLE);
-    }
+    },
+    fightLog() {
+      return this.$store.getters.getCurrentEnemyLog;
+    },
   },
   methods: {
     handleClickEvent() {
